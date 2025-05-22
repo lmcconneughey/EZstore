@@ -16,7 +16,7 @@ const notFounfPage = () => {
         <div className="p-6 w-1/3 rounded-lg shadow-md text center">
             <h1 className="text-3xl text-center font-bold mb-4">Not Found</h1>
             <p className="text-destructive text-center">Could Not Find Requested Page</p>
-            <Button variant={"outline"} className="mt-4 ml-5 items-center" onClick={() => (window.location.href = '/')}>
+            <Button variant={"outline"} className="mt-4 w-full items-center" onClick={() => (window.location.href = '/')}>
                 Back To Home
             </Button>
         </div>
