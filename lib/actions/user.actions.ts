@@ -1,8 +1,10 @@
 'use server'
 
-import { signInFormSchema } from "../validators"
+import { signInFormSchema, signUpFormSchema } from "../validators"
 import {signIn, signOut} from "@/auth"
 import { isRedirectError } from "next/dist/client/components/redirect-error"
+import { hashSync } from "bcrypt-ts-edge"
+import { prisma } from "@/db/prisma"
 
 // credentials sign in
 
@@ -27,4 +29,43 @@ export async function signInWithCredentials(prevState: unknown, formData: FormDa
 // sign out user
 export async  function signOutUser() {
     await signOut()
+}
+
+// sign up/rigister user
+export async function signUpUser(prevState: unknown, forData: FormData) {
+    try {
+        const user = signUpFormSchema.parse({
+            name: forData.get('name'),
+            email: forData.get('email'),
+            password: forData.get('password'),
+            confirmPassword: forData.get('confirmPassword'),
+        });
+
+        const plainPassword = user.password // before hash 
+
+        user.password = hashSync(user.password, 10)//<< before it goes into the db
+
+        await prisma.user.create({
+            data: {
+                name: user.name,
+                email: user.email,
+                password: user.password
+            }
+        })
+        // sign in after user is created
+        await signIn('credentials', {
+            email: user.email,
+            password: plainPassword,
+        });
+
+        return {
+            success: true,
+            message: "User registered successfully"
+        }
+    } catch (error) {
+        if(isRedirectError(error)) {
+            throw error//<< next handle redirect
+        }
+        return {success: false, message: "User was not registered"}
+    }
 }
