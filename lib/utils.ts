@@ -17,3 +17,21 @@ export function formatNumberWithDecimal(num: number): string {
 }
 
 // ${int}.${decimal.padEnd(2, '0')} add a 0 if 39.9
+
+// Format errors
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function formatError(error: any) {
+  if(error.name === 'ZodError') {
+    // handle Zod Error
+    const fieldErrors = Object.keys(error.errors).map((field) => error.errors[field].message);
+    return fieldErrors.join('. ')
+  } else if (error.name === 'PrismaClientKnownRequestError' && error.code === 'P2002') {
+    //Handle Prisma Error
+    const field = error.meta?.target ? error.meta.target[0] : 'Field'
+    return `${field.charAt(0).toUpperCase() + field.slice(1)} already exists`
+
+  } else {
+    // Handle Other Errors
+    return typeof error.message === 'string' ? error.message : JSON.stringify(error.message)
+  }
+} 
