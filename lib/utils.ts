@@ -1,3 +1,4 @@
+import { strict } from "assert";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -48,3 +49,20 @@ export function round2(value: number | string) {
   }
 
 } 
+const CURRENCY_FORMATTER = new Intl.NumberFormat('en-US', {
+  currency: 'USD',
+  style: 'currency',
+  minimumFractionDigits: 2
+});
+
+// Format currency using formatter
+
+export function formatCurrency(amount: number | string | null) {
+  if(typeof amount === 'number') {
+    return CURRENCY_FORMATTER.format(amount)
+  } else if(typeof amount === 'string') {
+    return CURRENCY_FORMATTER.format(Number(amount))
+  } else {
+    return 'NaN'
+  }
+}

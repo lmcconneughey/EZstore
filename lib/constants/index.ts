@@ -14,3 +14,11 @@ export const signUpDefaultValues = {
     password: '',
     confirmPassword: '',
 }
+
+export const shippingAddressDefaultValues = {
+    fullName: 'Larry La',
+    streetAddress: "123 overThere ln",
+    city: 'circuit city',
+    postalCode: '12345',
+    country: 'USA',
+}
