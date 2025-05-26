@@ -16,9 +16,9 @@ export const signUpDefaultValues = {
 }
 
 export const shippingAddressDefaultValues = {
-    fullName: 'Larry La',
-    streetAddress: "123 overThere ln",
-    city: 'circuit city',
-    postalCode: '12345',
-    country: 'USA',
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: '',
 }
