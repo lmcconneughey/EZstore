@@ -13,9 +13,11 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
+
 const CartTable = ({cart}: {cart?: Cart}) => {
     const router = useRouter()
     const [isPending, startTransition ] = useTransition()
+    
 
 
     return ( <><h1 className="py-4 h2-bold">

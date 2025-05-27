@@ -1,6 +1,6 @@
 import CartTable from "./cart-table";
 import { getMyCart } from "@/lib/actions/cart.actions";
-
+//import { auth } from "@/auth";
 
 export const metadata = {
     title: 'Shopping Cart'

@@ -19,7 +19,7 @@ const ShippingAddressPage = async () => {
     const userId = session?.user?.id;
     console.log(userId)
 
-    if(!userId) throw new Error("No user ID");//<<
+    if(!userId) redirect('/sign-in')
 
     const user = await getUserById(userId)
 

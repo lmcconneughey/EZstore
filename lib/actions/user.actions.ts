@@ -97,7 +97,7 @@ export async function updateUserAddress(data: ShippAddress) {
             where: { id: session?.user?.id}
         });
 
-        if(!currentUser) throw new Error('User not found')
+        if(!currentUser) throw new Error('User not found')//<
 
         const address = shippingAddressSchema.parse(data)
 
