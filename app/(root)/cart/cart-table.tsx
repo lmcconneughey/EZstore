@@ -8,7 +8,7 @@ import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
 import { ArrowRight, Loader, Minus, Plus } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import {Table, TableBody, TableHead, TableHeader, TableRow, TableCell} from "@/components/ui/table"
+import { Table, TableBody, TableHead, TableHeader, TableRow, TableCell } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
@@ -18,8 +18,6 @@ const CartTable = ({cart}: {cart?: Cart}) => {
     const router = useRouter()
     const [isPending, startTransition ] = useTransition()
     
-
-
     return ( <><h1 className="py-4 h2-bold">
         Shopping Cart
         </h1>
