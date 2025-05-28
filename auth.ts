@@ -71,7 +71,7 @@ export const config = {
         async jwt({token, user, trigger, session}: any) {
             // Assign user fields to token
             if(user) {
-                token.role = user.role;
+                token.id = user.id
 
                 // if user has no name, use email
                 if(user.name === 'NO_NAME') {
@@ -83,10 +83,27 @@ export const config = {
                         data: {name: token.name}
                     })
                 }
+            
             }
             return token
         },
         authorized({request, auth}: any) {
+            // Array of regex paths to protect
+            const protectedPaths =[
+                /\/shipping-address/,
+                /\/payment-method/,
+                /\/place-order/,
+                /\/profile/,
+                /\/user\/(.*)/,
+                /\/order\/(.*)/,
+                /\/admin/,
+            ]
+            // Get pathname from request Url Obj
+            const { pathname } = request.nextUrl
+
+            // Check if user is accessing a protected path
+            if(!auth && protectedPaths.some((path) => path.test(pathname))) return false 
+
             // Check session cart cookie 
             if(!request.cookies.get('sessionCartId')) {
                // Generate new session cart id cookie session start
