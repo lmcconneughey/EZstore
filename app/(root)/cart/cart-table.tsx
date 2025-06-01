@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 
-
+// style Go Shopping Link
 const CartTable = ({cart}: {cart?: Cart}) => {
     const router = useRouter()
     const [isPending, startTransition ] = useTransition()
@@ -23,7 +23,7 @@ const CartTable = ({cart}: {cart?: Cart}) => {
         </h1>
         {!cart || cart.items.length === 0 ? (
             <div>
-                Cart is empty.<Link href="/">Go Shopping</Link>
+                Cart is empty. <Link href="/">Go Shopping</Link>
             </div>
         ) : (
            <div className="grid md:grid-cols-4 md:gap-5">
