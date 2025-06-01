@@ -38,7 +38,6 @@ export function formatError(error: any) {
 } 
 
 // Round number 2 decimal places
-
 export function round2(value: number | string) {
   if(typeof value === 'number') {
     return Math.round((value + Number.EPSILON) * 100) /100;
@@ -56,7 +55,6 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat('en-US', {
 });
 
 // Format currency using formatter
-
 export function formatCurrency(amount: number | string | null) {
   if(typeof amount === 'number') {
     return CURRENCY_FORMATTER.format(amount)
@@ -66,3 +64,48 @@ export function formatCurrency(amount: number | string | null) {
     return 'NaN'
   }
 }
+
+// Shorten UUID
+export function formatId(id: string) {
+  return `..${id.substring(id.length - 6)}`;
+}
+
+// Format date & time
+export const formatDateTime = (dateString: Date) => {
+  const dateTimeOptions: Intl.DateTimeFormatOptions = {
+    month: 'short', 
+    year: 'numeric', 
+    day: 'numeric', 
+    hour: 'numeric', 
+    minute: 'numeric', 
+    hour12: true, 
+  };
+  const dateOptions: Intl.DateTimeFormatOptions = {
+    weekday: 'short', 
+    month: 'short', 
+    year: 'numeric',
+    day: 'numeric', 
+  };
+  const timeOptions: Intl.DateTimeFormatOptions = {
+    hour: 'numeric', 
+    minute: 'numeric', 
+    hour12: true, 
+  };
+  const formattedDateTime: string = new Date(dateString).toLocaleString(
+    'en-US',
+    dateTimeOptions
+  );
+  const formattedDate: string = new Date(dateString).toLocaleString(
+    'en-US',
+    dateOptions
+  );
+  const formattedTime: string = new Date(dateString).toLocaleString(
+    'en-US',
+    timeOptions
+  );
+  return {
+    dateTime: formattedDateTime,
+    dateOnly: formattedDate,
+    timeOnly: formattedTime,
+  };
+};
