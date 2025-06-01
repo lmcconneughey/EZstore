@@ -38,7 +38,7 @@ export async function addItemToCart( data: CartItem ) {
         const userId = session?.user?.id ? (session.user.id as string) : undefined;
 
         // Get cart
-        const cart = await getMyCart()
+        const cart = await getMyCart()//<<<<
 
         // Parse and validate item
         const item = cartItemSchema.parse(data)
@@ -84,7 +84,7 @@ export async function addItemToCart( data: CartItem ) {
             if (existItem) {
                 // check stock
                 if(product.stock < existItem.qty + 1) {
-                    throw new Error('Not enought stock')
+                    throw new Error('Not enough stock')
                 };
                 //increase quantity
                 (cart.items as CartItem[]).find(
