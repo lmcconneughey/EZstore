@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
-import { ShippAddress } from "@/types";
+import { ShippingAddress } from "@/types";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import CheckoutSteps from "@/components/shared/checkout-steps";
@@ -30,7 +30,7 @@ const PlaceOrderPage = async () => {
     if(!user.address) redirect('/shipping-addess')
     if(!user.paymentMethod) redirect('/payment-method')
 
-    const userAddress = user.address as ShippAddress
+    const userAddress = user.address as ShippingAddress
 
     return ( <>
     <CheckoutSteps current={3} />

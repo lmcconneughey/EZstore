@@ -6,7 +6,7 @@ import { isRedirectError } from "next/dist/client/components/redirect-error"
 import { hashSync } from "bcrypt-ts-edge"
 import { prisma } from "@/db/prisma"
 import { formatError } from "../utils"
-import { ShippAddress } from "@/types"
+import { ShippingAddress } from "@/types"
 import { z } from "zod"
 
 // credentials sign in
@@ -90,7 +90,7 @@ export async function getUserById(userId: string) {
 
 // Update user's address
 
-export async function updateUserAddress(data: ShippAddress) {
+export async function updateUserAddress(data: ShippingAddress) {
     try {
         const session = await auth()
 
