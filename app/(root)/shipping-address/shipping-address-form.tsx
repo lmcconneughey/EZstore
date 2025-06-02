@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
-import { ShippAddress } from "@/types";
+import { ShippingAddress } from "@/types";
 import { shippingAddressSchema } from "@/lib/validators";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ControllerRenderProps, useForm, SubmitHandler } from "react-hook-form"
@@ -16,7 +16,7 @@ import { ArrowRight, Loader } from "lucide-react";
 import { updateUserAddress } from "@/lib/actions/user.actions";
 
 
-const ShippingAddressForm = ({address}: {address: ShippAddress}) => {
+const ShippingAddressForm = ({address}: {address: ShippingAddress}) => {
     const router = useRouter()
 
     const form = useForm<z.infer<typeof shippingAddressSchema>>({
