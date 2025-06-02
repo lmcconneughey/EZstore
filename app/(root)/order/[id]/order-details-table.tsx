@@ -47,9 +47,10 @@ const OrderDetailsTable = ({order, paypalClientId}: {order: Order, paypalClientI
         }
         return res.data
     }
- // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+ 
     const handleApprovePayPalOrder = async (data: {orderID: string}) => {
         const res = await approvePayPalOrder(order.id, data)
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         res.success ? toast.message(res.message) : toast.error(res.message) 
     }
 
