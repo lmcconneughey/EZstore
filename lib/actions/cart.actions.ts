@@ -3,7 +3,7 @@
 import { cookies } from "next/headers"
 import { CartItem } from "@/types"
 import { formatError, convertPrismaObjToJSObj, round2 } from "../utils"
-
+import { Prisma } from "../generated/prisma"
 import { auth } from "@/auth"
 import { prisma } from "../../db/prisma"
 import { cartItemSchema, insertCartSchema } from "../validators"
@@ -65,7 +65,7 @@ export async function addItemToCart( data: CartItem ) {
             // Add to db
 
             await prisma.cart.create({
-                data: newCart
+                data: newCart,
             })
 
             // Revalidate product page
@@ -102,7 +102,7 @@ export async function addItemToCart( data: CartItem ) {
                 
                 where: { id: cart.id },
                 data: {
-                  items: cart.items as CartItem[],
+                  items: cart.items as Prisma.CartUpdateitemsInput[],//<< CartItem[]
                   ...calcPrice(cart.items as CartItem[]),
                 },
               });
