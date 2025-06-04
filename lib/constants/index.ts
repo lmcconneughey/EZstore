@@ -28,3 +28,7 @@ PAYMENT_METHODS.split(", ") : ['PayPal', 'Stripe', 'CashOnDelivery'];
 
 export const DEFFAULT_PAYMENT_METHOD = process.env.DEFAULT_PAYMENT_METHOD || 'PayPal';
 
+// User orders pagination max orders dispalyed
+
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 2;
+
