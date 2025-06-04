@@ -1,6 +1,7 @@
 //import { strict } from "assert";
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import qs from "query-string"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -109,3 +110,25 @@ export const formatDateTime = (dateString: Date) => {
     timeOnly: formattedTime,
   };
 };
+
+// Build pagination links
+export function formUrlQuery({
+    params,
+    key,
+    value
+}: {
+    params: string;
+    key: string;
+    value: string | null
+}) {
+    const query = qs.parse(params)// obj with curr page
+    query[key] = value;//<< obj with next or prev page
+  
+    return qs.stringifyUrl({
+      url: window.location.pathname,// user/orders?page=1
+      query, 
+    }, {
+      skipNull: true
+    });
+  
+}
