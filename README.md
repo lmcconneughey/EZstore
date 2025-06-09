@@ -16,7 +16,7 @@ A modern and feature-rich eCommerce platform with full authentication, admin das
   - Monthly sales chart and real-time stats
 - 🧑‍💼 **User Accounts**: Profiles, order history, and review system
 - 📷 **Image Uploading** with cloud support
-- 🧰 **Form Management**: React Hook Form + Zod for robust form validation
+- 🧰 **Form Management**: React Hook Form + Zod for form validation
 - 🚢 **Continuous Deployment**: Git + Vercel integration for seamless updates
 
 ---
