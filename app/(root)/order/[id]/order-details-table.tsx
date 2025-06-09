@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { createPayPalOrder, approvePayPalOrder, updateOrderToPaidCOD, deliverOrder } from "@/lib/actions/order.actions";
 import { useTransition } from "react";
-import { start } from "repl";
 
 const OrderDetailsTable = ({
     order, 
@@ -73,7 +72,13 @@ const OrderDetailsTable = ({
                 disabled={isPending}
                 onClick={() => startTransition(async() => {
                     const res = await updateOrderToPaidCOD(order.id)
-                    res.success ? toast.success(res.message) : toast.error(res.message)
+                    if(!res.success) {
+                        toast.error(res.message)
+                        return;
+                    } else {
+                        toast.success(res.message)
+                    }
+
                 })}
             >
                 {isPending ? 'processing...' : 'Mark As Paid'}
@@ -89,7 +94,12 @@ const OrderDetailsTable = ({
                 disabled={isPending}
                 onClick={() => startTransition(async() => {
                     const res = await deliverOrder(order.id)
-                    res.success ? toast.success(res.message) : toast.error(res.message)
+                    if(!res.success) {
+                        toast.error(res.message)
+                        return;
+                    } else {
+                        toast.success(res.message)
+                    }
                 })}
             >
                 {isPending ? 'processing...' : 'Mark As Delivered'}
