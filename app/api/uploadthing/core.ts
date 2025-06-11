@@ -15,7 +15,7 @@ export const ourFileRouter = {
         if (!session) throw new UploadThingError("Unauthorized");
         return { userId: session?.user?.id };
       })
-      .onUploadComplete(async ({ metadata }: {metadata: any}) => {
+      .onUploadComplete(async ({ metadata }) => {
         return { uploadedBy: metadata.userId };
       }),
   } satisfies FileRouter;
