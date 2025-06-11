@@ -11,7 +11,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    template: ` %s | EZ store`,// home | prostore
+    template: ` %s | EZ store`,// home | ez store
     default: APP_NAME
   },
   description: APP_DESCRIPTION,
