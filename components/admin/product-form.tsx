@@ -18,7 +18,6 @@ import { UploadButton } from "@/lib/uploadthing";
 import { Card, CardContent } from "../ui/card";
 import Image from "next/image";
 import { Checkbox } from "../ui/checkbox";
-import { Files } from "lucide-react";
 
 const ProductForm = ({type, product, productId}: {
     type: 'Create' | 'Update';
