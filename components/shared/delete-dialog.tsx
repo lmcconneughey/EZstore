@@ -21,7 +21,7 @@ const DeleteDialog = ({id, action}: {
                 toast.error(res.message)
             } else {
                 setOpen(false);
-                toast.success(res.success)
+                toast.success(res.message)// fix: empty toast message due to res.succes passed into toast message field
             }
         })
     }
