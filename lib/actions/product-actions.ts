@@ -6,6 +6,7 @@ import { LATEST_PRODUCTS_LIMIT, PAGE_SIZE } from "../constants";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { insertProductSchema, updateProductSchema } from "../validators";
+
 // Get latest products
 export async function getLatestProducts() {
     const data = await prisma.product.findMany({
@@ -16,20 +17,26 @@ export async function getLatestProducts() {
     return convertPrismaObjToJSObj(data)
 }
 // Get single product by slug
-
 export async function getProductBySlug(slug: string) {
     return await prisma.product.findFirst({
         where: {slug: slug}
     })
 }
 
-// Get all products
+// Get single product by Id
+export async function getProductById(productId: string) {
+    const data = await prisma.product.findFirst({
+        where: {id: productId}
+    });
+    return convertPrismaObjToJSObj(data)
+}
 
+// Get all products
 export async function getAllProducts({
-    //query,
+    query,
     limit = PAGE_SIZE,
     page,
-    //category
+    category
 }: {
     query: string;
     limit?: number;
@@ -51,7 +58,6 @@ export async function getAllProducts({
 }
 
 // Delete product
-
 export async function deleteProduct(id: string) {
     try {
         const productExists = await prisma.product.findFirst({
