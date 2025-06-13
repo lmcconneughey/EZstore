@@ -2,12 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { APP_NAME } from "@/lib/constants";
 import Menu from "./menu";
+import CategoryDrawer from "./category-drawer";
 
 const Header = () => {
     return  <header className="w-full border-b">
         <div className="wrapper flex-betweeen">
             <div className="flex-start">
-                <Link href='/' className="flex-start absolute pt-7 ml-2">
+                <CategoryDrawer />
+                <Link href='/' className="flex-start ml-2">
                     <Image 
                         src='/images/ez-store-logo.png' 
                         alt={`${APP_NAME} logo`} 
