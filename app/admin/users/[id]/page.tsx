@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
 import UpdateUserForm from "./update-user-form";
 
-export const metadat: Metadata = {
+export const metadata: Metadata = {
     title: 'Update User'
 }
 
