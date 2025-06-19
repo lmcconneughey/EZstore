@@ -30,8 +30,10 @@ const ReviewList = ({
         loadReviews()
     }, [productId])
 
-    const reload = () => {
-        console.log("review submited"); 
+    // Reload reviews after created/updated
+    const reload = async () => {
+        const res = await getReviews({productId});
+        setReviews([...res.data])
     }
     
     return ( <div className="space-y-4">
