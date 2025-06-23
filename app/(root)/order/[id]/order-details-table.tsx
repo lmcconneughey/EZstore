@@ -12,7 +12,7 @@ import { toast } from "sonner";
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { createPayPalOrder, approvePayPalOrder, updateOrderToPaidCOD, deliverOrder } from "@/lib/actions/order.actions";
 import { useTransition } from "react";
-import StripePayment from "./stripe-paymaent";
+import StripePayment from "./stripe-payment";
 import { number } from "zod";
 
 const OrderDetailsTable = ({
