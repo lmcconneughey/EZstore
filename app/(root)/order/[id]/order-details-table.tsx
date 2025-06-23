@@ -13,7 +13,6 @@ import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@pa
 import { createPayPalOrder, approvePayPalOrder, updateOrderToPaidCOD, deliverOrder } from "@/lib/actions/order.actions";
 import { useTransition } from "react";
 import StripePayment from "./stripe-payment";
-import { number } from "zod";
 
 const OrderDetailsTable = ({
     order, 
