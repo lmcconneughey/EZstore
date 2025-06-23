@@ -2,7 +2,8 @@ import { Metadata } from "next";
 import { getOrderById } from "@/lib/actions/order.actions";
 import { notFound } from "next/navigation";
 import OrderDetailsTable from "./order-details-table";
-import {ShippingAddress} from '@/types'
+import {ShippingAddress} from '@/types';
+import Stripe from "stripe";
 import { auth } from "@/auth";
 
 export const metadata: Metadata = {
@@ -21,14 +22,30 @@ const OrderDetailsPage = async (props: {
 
     const session = await auth()
 
+    let client_secret = null;
+
+    //Check if not paid and useing stripe
+    if(order.paymentMethod === 'Stripe' && !order.isPaid) {
+        // init stripe instance
+        const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+        // payment intent
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: Math.round(Number(order.totalPrice) * 100),//<< total order price in cents
+            currency: 'USD',
+            metadata: {orderId: order.id}
+        });
+        client_secret = paymentIntent.client_secret;
+    }
+
     return ( <OrderDetailsTable 
-        order={{
-        ...order,
-        shippingAddress: order.shippingAddress as ShippingAddress 
-        }}
-        paypalClientId={process.env.PAYPAL_CLIENT_ID || 'sb'}
-        isAdmin={session?.user?.role === 'admin' || false}
-    /> );
+                order={{
+                ...order,
+                shippingAddress: order.shippingAddress as ShippingAddress 
+                }}
+                stripeClientSecret={client_secret}
+                paypalClientId={process.env.PAYPAL_CLIENT_ID || 'sb'}
+                isAdmin={session?.user?.role === 'admin' || false}
+            /> );
 }
  
 export default OrderDetailsPage;

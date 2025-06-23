@@ -12,15 +12,19 @@ import { toast } from "sonner";
 import { PayPalButtons, PayPalScriptProvider, usePayPalScriptReducer } from "@paypal/react-paypal-js"
 import { createPayPalOrder, approvePayPalOrder, updateOrderToPaidCOD, deliverOrder } from "@/lib/actions/order.actions";
 import { useTransition } from "react";
+import StripePayment from "./stripe-paymaent";
+import { number } from "zod";
 
 const OrderDetailsTable = ({
     order, 
     paypalClientId,
-    isAdmin
+    isAdmin,
+    stripeClientSecret
 }: {
     order: Order; 
     paypalClientId: string;
-    isAdmin: boolean
+    isAdmin: boolean;
+    stripeClientSecret: string | null;
 }) => {
     const {
         id,
@@ -201,7 +205,7 @@ const OrderDetailsTable = ({
                     <div className="flex justify-between">
                         <div>Total</div>
                         <div>{formatCurrency(totalPrice)}</div>
-                    </div> 
+                    </div>
                     {/* PayPal Payment */}
                     {!isPaid && paymentMethod === 'PayPal' && (
                         <PayPalScriptProvider options={{ clientId: paypalClientId }}>
@@ -212,6 +216,16 @@ const OrderDetailsTable = ({
                             />
                         </PayPalScriptProvider>
                     )}
+                    {/* Stripe Payment */}
+                    {
+                        !isPaid && paymentMethod === 'Stripe' && stripeClientSecret && (
+                            <StripePayment 
+                                priceInCents={Number(order.totalPrice) * 100}
+                                orderId={order.id}
+                                clientSecret={stripeClientSecret}
+                            />
+                        )
+                    }
                     {/* Cash on Del */}
                     {
                         isAdmin && !isPaid && paymentMethod === 'CashOnDelivery' && (
